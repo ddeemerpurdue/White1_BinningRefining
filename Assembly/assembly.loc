@@ -1,0 +1,11 @@
+# Locations to assemblies using in this analysis.
+
+/scratch/snyder/d/ddeemer/WhiteRed/assembly_metaSpades/
+-rwxr-x--- 1 ddeemer student 278M Apr  8 16:03 R1.contigs.fasta
+-rwxr-x--- 1 ddeemer student 257M Apr  8 16:03 R2.contigs.fasta
+-rwxr-x--- 1 ddeemer student 177M Apr  8 16:03 R3.contigs.fasta
+-rwxr-x--- 1 ddeemer student 239M Apr  8 16:03 R4.contigs.fasta
+-rwxr-x--- 1 ddeemer student 110M Apr  8 16:03 W1.contigs.fasta
+-rwxr-x--- 1 ddeemer student 110M Apr  8 16:03 W2.contigs.fasta
+-rwxr-x--- 1 ddeemer student 118M Apr  8 16:03 W3.contigs.fasta
+-rwxr-x--- 1 ddeemer student  95M Apr  8 16:03 W4.contigs.fasta
