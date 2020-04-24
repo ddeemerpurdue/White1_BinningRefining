@@ -1,0 +1,43 @@
+#!/bin/bash -l
+
+#SBATCH -A lindems
+#SBATCH --nodes=1
+#SBATCH --ntasks=20
+#SBATCH --mem-per-cpu=5G
+#SBATCH --time=24:00:00
+#SBATCH --mail-user=ddeemer@purdue.edu
+
+cd /scratch/snyder/d/ddeemer/WhiteRed/BAM
+
+# Step 1: Load required modules:
+module load bioinfo
+module load samtools/1.4
+module load anaconda/5.3.1-py37
+
+# Step 2: Filter .BAM files and write to a new .SAM
+samtools view -h W1_Aligned.bam | python samprocessing/sam_threshold_filter.py -o filtered_SAMs/W1_99F.sam -s 150 -t 0.99
+samtools view -h W2_Aligned.bam | python samprocessing/sam_threshold_filter.py -o filtered_SAMs/W2_99F.sam -s 150 -t 0.99
+samtools view -h W1_Aligned.bam | python samprocessing/sam_threshold_filter.py -o filtered_SAMs/W3_99F.sam -s 150 -t 0.99
+samtools view -h W4D7_Aligned.bam | python samprocessing/sam_threshold_filter.py -o filtered_SAMs/W4D7_99F.sam -s 150 -t 0.99
+samtools view -h W4D15_Aligned.bam | python samprocessing/sam_threshold_filter.py -o filtered_SAMs/W4D15_99F.sam -s 150 -t 0.99
+
+# Step 3: Compress the .SAM to .BAM
+samtools view -S -b filtered_SAMs/W1_99F.sam > filtered_SAMs/W1_BT2_99F.bam
+samtools view -S -b filtered_SAMs/W2_99F.sam > filtered_SAMs/W2_BT2_99F.bam
+samtools view -S -b filtered_SAMs/W3_99F.bam > filtered_SAMs/W3_BT2_99F.bam
+samtools view -S -b filtered_SAMs/W4D7_99F.bam > filtered_SAMs/W4D7_BT2_99F.bam
+samtools view -S -b filtered_SAMs/W4D15_99F.bam > filtered_SAMs/W4D15_BT2_99F.bam
+
+# Step 4: Sort the .BAM files
+samtools sort filtered_SAMs/W1_BT2_99F.bam -o filtered_SAMs/W1_BT2_99F.sorted.bam
+samtools sort filtered_SAMs/W2_BT2_99F.bam -o filtered_SAMs/W2_BT2_99F.sorted.bam
+samtools sort filtered_SAMs/W3_BT2_99F.bam -o filtered_SAMs/W3_BT2_99F.sorted.bam
+samtools sort filtered_SAMs/W4D7_BT2_99F.bam -o filtered_SAMs/W4D7_BT2_99F.sorted.bam
+samtools sort filtered_SAMs/W4D15_BT2_99F.bam -o filtered_SAMs/W4D15_BT2_99F.sorted.bam
+
+# Step 5: Index the .BAM files
+samtools index filtered_SAMs/W1_BT2_99F.sorted.bam
+samtools index filtered_SAMs/W2_BT2_99F.sorted.bam
+samtools index filtered_SAMs/W3_BT2_99F.sorted.bam
+samtools index filtered_SAMs/W4D7_BT2_99F.sorted.bam
+samtools index filtered_SAMs/W4D15_BT2_99F.sorted.bam
