@@ -1,0 +1,14 @@
+#!/bin/bash -l
+#SBATCH --nodes=1
+#SBATCH --ntasks=20
+#SBATCH --mem-per-cpu=5G
+#SBATCH --time=00:30:00
+
+cd /scratch/snyder/d/ddeemer/WhiteRed/removed_contigs
+
+# Step 1: Load in required modules/environments
+module load anaconda/5.3.1-py37
+source activate Example
+
+# Repeat for each original and filtered directories
+python fastaprocessing/grab_removed_contigs.py original/ filtered/ AllBWA_W1RF__.fasta
