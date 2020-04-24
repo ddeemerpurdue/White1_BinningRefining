@@ -1,1 +1,24 @@
+# Location to the raw .FASTQ files used for this analysis:
 
+$ /scratch/snyder/d/ddeemer/WhiteRed/FASTQ
+
+$ Files listed:
+
+-rw-r-x--- 1 ddeemer student  31G Apr  8 16:12 043947_W43-D15_R1_filtered.fastq
+-rw-r-x--- 1 ddeemer student  31G Apr  8 16:13 043947_W43-D15_R2_filtered.fastq
+-rw-r-x--- 1 ddeemer student  29G Apr  8 15:57 043948_W12-D7_R1_filtered.fastq
+-rw-r-x--- 1 ddeemer student  29G Apr  8 15:58 043948_W12-D7_R2_filtered.fastq
+-rw-r-x--- 1 ddeemer student  64G Apr  8 15:59 043949_W22-D7_R1_filtered.fastq
+-rw-r-x--- 1 ddeemer student  64G Apr  8 16:00 043949_W22-D7_R2_filtered.fastq
+-rw-r-x--- 1 ddeemer student  55G Apr  8 16:01 043950_W32-D7_R1_filtered.fastq
+-rw-r-x--- 1 ddeemer student  55G Apr  8 16:02 043950_W32-D7_R2_filtered.fastq
+-rw-r-x--- 1 ddeemer student  56G Apr  8 16:04 043951_W42-D7_R1_filtered.fastq
+-rw-r-x--- 1 ddeemer student  56G Apr  8 16:06 043951_W42-D7_R2_filtered.fastq
+-rw-r-x--- 1 ddeemer student 6.1G Apr  8 16:06 043952_R12-D7_R1_filtered.fastq.gz
+-rw-r-x--- 1 ddeemer student 6.2G Apr  8 16:07 043952_R12-D7_R2_filtered.fastq.gz
+-rw-r-x--- 1 ddeemer student 6.0G Apr  8 16:07 043953_R22-D7_R1_filtered.fastq.gz
+-rw-r-x--- 1 ddeemer student 6.3G Apr  8 16:08 043953_R22-D7_R2_filtered.fastq.gz
+-rw-r-x--- 1 ddeemer student 4.2G Apr  8 16:09 043954_R32-D7_R1_filtered.fastq.gz
+-rw-r-x--- 1 ddeemer student 4.0G Apr  8 16:09 043954_R32-D7_R2_filtered.fastq.gz
+-rw-r-x--- 1 ddeemer student 7.9G Apr  8 16:10 043955_R42-D7_R1_filtered.fastq.gz
+-rw-r-x--- 1 ddeemer student 8.1G Apr  8 16:11 043955_R42-D7_R2_filtered.fastq.gz
