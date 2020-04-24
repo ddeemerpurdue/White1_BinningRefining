@@ -1,0 +1,46 @@
+#!/bin/bash -l
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=20
+#SBATCH --mem-per-cpu=10G
+#SBATCH --time=24:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ddeemer@purdue.edu
+
+cd /scratch/snyder/d/ddeemer/WhiteRed
+
+# Step 1: Load required modules:
+module load bioinfo
+module load bwa/0.7.17
+module load samtools/1.4
+
+
+# Step 2: Index the contig file
+bwa index -p W1_Index -a is assembly_metaSpades/W1.contigs.fasta
+
+
+#  Step 3: Align .fastq files to the indexed W1.contigs.fasta
+# W1
+bwa mem -t 20 W1_Index FASTQ/043948_W12-D7_R1_filtered.fastq FASTQ/043948_W12-D7_R2_filtered.fastq | samtools view -b -o BAM/W1_Aligned.bam
+samtools sort -o BAM/W1_Aligned.sorted.bam BAM/W1_Aligned.bam
+samtools index BAM/W1_Aligned.sorted.bam
+
+# W2
+bwa mem -t 20 W1_Index FASTQ/043949_W22-D7_R1_filtered.fastq FASTQ/043949_W22-D7_R2_filtered.fastq | samtools view -b -o BAM/W2_Aligned.bam
+samtools sort -o BAM/W2_Aligned.sorted.bam BAM/W2_Aligned.bam
+samtools index BAM/W2_Aligned.sorted.bam
+
+# W3
+bwa mem -t 20 W1_Index FASTQ/043950_W32-D7_R1_filtered.fastq FASTQ/043950_W32-D7_R2_filtered.fastq | samtools view -b -o BAM/W3_Aligned.bam
+samtools sort -o BAM/W3_Aligned.sorted.bam BAM/W3_Aligned.bam
+samtools index BAM/W3_Aligned.sorted.bam
+
+# W4
+bwa mem -t 20 W1_Index FASTQ/043951_W42-D7_R1_filtered.fastq FASTQ/043951_W42-D7_R2_filtered.fastq | samtools view -b -o BAM/W4D7_Aligned.bam
+samtools sort -o BAM/W4D7_Aligned.sorted.bam BAM/W4D7_Aligned.bam
+samtools index BAM/W4D7_Aligned.sorted.bam
+
+# W4_D15
+bwa mem -t 20 W1_Index FASTQ/043947_W43-D15_R1_filtered.fastq  FASTQ/043947_W43-D15_R1_filtered.fastq | samtools view -b -o BAM/W4D15_Aligned.bam
+samtools sort -o BAM/W4D15_Aligned.sorted.bam BAM/W4D15_Aligned.bam
+samtools index BAM/W4D15_Aligned.sorted.bam
