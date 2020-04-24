@@ -1,0 +1,49 @@
+#!/bin/bash -l
+
+#SBATCH -A standby
+#SBATCH --nodes=1
+#SBATCH --time=02:00:00
+ #SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ddeemer@purdue.edu
+
+cd <base_directory>
+
+# Step 1: Load required modules:
+
+module load bioinfo
+module load RefineM/0.0.25
+module load blast/2.9.0+
+module load HMMER/3.2.1
+
+
+# Step 2: Grab database files and construct
+mkdir reference
+# Download protein database
+wget -P /reference/ https://data.ace.uq.edu.au/public/misc_downloads/refinem/gtdb_r89_protein_db.2019-09-27.faa.gz
+gunzip gtdb_r89_protein_db.2019-09-27.faa.gz
+# Make it into Diamond database
+diamond makedb -p 32 -d gtdb_r80_protein_db.2017-11-09.faa --in gtdb_r80_protein_db.2017-11-09.faa
+# Make it into blast database
+makeblastdb -dbtype prot -in gtdb_r80_protein_db.2017-11-09.faa
+
+# Download taxonomy database
+wget -P /reference/ https://data.ace.uq.edu.au/public/misc_downloads/refinem/gtdb_r89_taxonomy.2019-09-27.tsv
+# Download SSU database
+wget -P /reference/ https://data.ace.uq.edu.au/public/misc_downloads/refinem/gtdb_r80_ssu_db.2018-01-18.fna
+
+
+# Step 3a - Run RefineM to remove contamination based on genomic properties
+refinem scaffold_stats -c 20 -x fasta <path/to/contig/file.fasta> <path/to/bin/directory> <stats_output_dir> <path/to/BAMs>
+refinem outliers <stats_output_dir>/scaffold_stats.tsv <stats_output_dir>/<outlier_output_dir>
+refinem filter_bins -x fasta <path/to/bin/directory> <stats_output_dir>/<outlier_output_dir>/outliers.tsv <stats_output_dir>/<outlier_output_dir>/<filtered_output_dir>
+
+
+# Step 3b - Remove contamination based on taxonomic assignments
+refinem call_genes -c 40 -x fasta <stats_output_dir>/<outlier_output_dir>/<filtered_output_dir> <gene_output_dir>
+refinem taxon_profile -c 40 -x fna <gene_output_dir> <stats_output_dir>/scaffold_stats.tsv reference/gtdb_r89_protein_db.2019-09-27.faa.dmnd reference/gtdb_r89_taxonomy.2019-09-27.tsv <taxon_profile_output_dir>
+refinem taxon_filter -c 40 <taxon_profile_output_dir> taxon_filter.tsv
+refinem filter_bins -x fasta <stats_output_dir>/<outlier_output_dir>/<filtered_output_dir> taxon_filter.tsv <taxon_profile_output_dir>/<filtered_output_directory>
+
+
+# Step 3c - Remove contigs with incongruent 16s rRNA genes
+refinem ssu_erroneous -x fasta <taxon_profile_output_dir>/<filtered_output_directory> <taxon_profile_output_dir> reference/gtdb_r80_ssu_db.2018-01-18.fna reference/gtdb_r89_taxonomy.2019-09-27.tsv <ssu_output_dir>
