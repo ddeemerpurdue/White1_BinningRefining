@@ -1,0 +1,5 @@
+/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance01.txt
+/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance02.txt
+/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance03.txt
+/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance04_D7.txt
+/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance04_D15.txt
