@@ -1,0 +1,121 @@
+MaxBin 2.2.3
+Input contig: assembly_metaSpades/W1.contigs.fasta
+out header: MaxBin_Results/W1Cont_AllMap
+Located abundance file [/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance01.txt]
+Located abundance file [/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance02.txt]
+Located abundance file [/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance03.txt]
+Located abundance file [/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance04_D7.txt]
+Located abundance file [/scratch/snyder/d/ddeemer/WhiteRed/Abundance_Files/abundance04_D15.txt]
+Searching against 107 marker genes to find starting seed contigs for [assembly_metaSpades/W1.contigs.fasta]...
+Done data collection. Running MaxBin...
+Command: /depot/bioinfo/apps/apps/MaxBin-2.2.3/src/MaxBin -fasta MaxBin_Results/W1Cont_AllMap.contig.tmp  -abund MaxBin_Results/W1Cont_AllMap.contig.tmp.abund1 -abund2 MaxBin_Results/W1Cont_AllMap.contig.tmp.abund2 -abund3 MaxBin_Results/W1Cont_AllMap.contig.tmp.abund3 -abund4 MaxBin_Results/W1Cont_AllMap.contig.tmp.abund4 -abund5 MaxBin_Results/W1Cont_AllMap.contig.tmp.abund5 -seed MaxBin_Results/W1Cont_AllMap.seed -out MaxBin_Results/W1Cont_AllMap -min_contig_length 1000 
+Done data collection. Running MaxBin...
+Command: /depot/bioinfo/apps/apps/MaxBin-2.2.3/src/MaxBin -fasta MaxBin_Results/W1Cont_AllMap.0007.fasta  -abund MaxBin_Results/W1Cont_AllMap.contig.tmp.abund1 -abund2 MaxBin_Results/W1Cont_AllMap.contig.tmp.abund2 -abund3 MaxBin_Results/W1Cont_AllMap.contig.tmp.abund3 -abund4 MaxBin_Results/W1Cont_AllMap.contig.tmp.abund4 -abund5 MaxBin_Results/W1Cont_AllMap.contig.tmp.abund5 -seed MaxBin_Results/W1Cont_AllMap.0007.out.seed -out MaxBin_Results/W1Cont_AllMap.0007.out -min_contig_length 1000 
+Minimum contig length set to 1000.
+Reading seed list...
+Looking for seeds in sequences.
+	NODE_7_length_359708_cov_264.832772 [56.513300] [74.407300] [63.082300] [71.163000] [58.637000]
+	NODE_34_length_215319_cov_329.149463 [62.034900] [81.745700] [75.261400] [88.011300] [82.555600]
+	NODE_37_length_210310_cov_89.445145 [35.701600] [6.808500] [9.457000] [20.201100] [0.195400]
+	NODE_40_length_207118_cov_105.166500 [40.265900] [3.576700] [13.440600] [64.176000] [1.350000]
+	NODE_51_length_189868_cov_312.370807 [60.204500] [42.425800] [40.237400] [73.600600] [77.331100]
+	NODE_67_length_165459_cov_29.607222 [18.698900] [2.613900] [3.177200] [1.530900] [0.218200]
+	NODE_138_length_102304_cov_83.447378 [33.919500] [15.862500] [4.166000] [11.986800] [0.018600]
+	NODE_153_length_96868_cov_574.412248 [72.054800] [49.108100] [7.439000] [74.469400] [14.646700]
+	NODE_187_length_87223_cov_23.985958 [15.205900] [34.177900] [29.502500] [33.679200] [20.741100]
+	NODE_202_length_82273_cov_13.083145 [9.244800] [2.565800] [2.501400] [0.931000] [0.001200]
+	NODE_249_length_70269_cov_14.623893 [10.437000] [6.523500] [12.173200] [3.636000] [0.160800]
+	NODE_321_length_56643_cov_1209.096275 [84.112800] [94.716000] [47.324500] [94.066300] [31.357800]
+	NODE_363_length_50932_cov_588.908937 [74.813500] [23.358600] [9.923000] [0.638100] [0.005900]
+	NODE_434_length_43969_cov_55.130027 [27.828700] [5.124100] [15.192500] [39.330000] [1.071200]
+	NODE_496_length_37961_cov_13.993853 [10.070900] [1.959900] [3.356100] [2.805500] [1.024700]
+	NODE_1398_length_10342_cov_6.468747 [4.970000] [55.260100] [78.050700] [36.559700] [4.989400]
+	NODE_1856_length_7445_cov_6.342219 [5.144400] [2.041600] [3.975800] [9.066500] [0.000100]
+	NODE_7083_length_1633_cov_32.169835 [19.902000] [57.869000] [23.821200] [18.922200] [0.612400]
+	NODE_11336_length_1003_cov_3.640295 [4.087700] [0.299100] [0.099700] [8.773700] [0.000100]
+Get 19 seeds.
+
+Start EM process.
+Iteration 1
+Iteration 2
+Iteration 3
+Iteration 4
+Iteration 5
+Iteration 6
+Iteration 7
+Iteration 8
+Iteration 9
+Iteration 10
+Iteration 11
+Iteration 12
+Iteration 13
+Iteration 14
+Iteration 15
+Iteration 16
+Iteration 17
+Iteration 18
+Iteration 19
+Iteration 20
+Iteration 21
+Iteration 22
+Iteration 23
+Iteration 24
+Iteration 25
+Iteration 26
+Iteration 27
+Iteration 28
+Iteration 29
+
+EM finishes successfully.
+
+Classifying sequences based on the EM result.
+Minimum probability for binning: 0.50
+Ignoring 0 bins without any sequences.
+Number of unclassified sequences: 35 (0.31%)
+Elapsed time:  0 days 00:02:04
+
+Minimum contig length set to 1000.
+Reading seed list...
+Looking for seeds in sequences.
+	NODE_94_length_129257_cov_86.614503 [35.115300] [19.914600] [3.636900] [12.631400] [0.011600]
+	NODE_224_length_74840_cov_13.458929 [9.434800] [24.426800] [15.201800] [16.389600] [0.644000]
+Get 2 seeds.
+
+Start EM process.
+Iteration 1
+Iteration 2
+Iteration 3
+Iteration 4
+Iteration 5
+Iteration 6
+Iteration 7
+Iteration 8
+
+EM finishes successfully.
+
+Classifying sequences based on the EM result.
+Minimum probability for binning: 0.50
+Ignoring 0 bins without any sequences.
+Number of unclassified sequences: 0 (0.00%)
+Elapsed time:  0 days 00:00:01
+
+Deleting intermediate files.
+
+
+========== Job finished ==========
+Yielded 20 bins for contig (scaffold) file assembly_metaSpades/W1.contigs.fasta
+
+Here are the output files for this run.
+Please refer to the README file for further details.
+
+Summary file: MaxBin_Results/W1Cont_AllMap.summary
+Genome abundance info file: MaxBin_Results/W1Cont_AllMap.abundance
+Marker counts: MaxBin_Results/W1Cont_AllMap.marker
+Marker genes for each bin: MaxBin_Results/W1Cont_AllMap.marker_of_each_gene.tar.gz
+Bin files: MaxBin_Results/W1Cont_AllMap.001.fasta - MaxBin_Results/W1Cont_AllMap.020.fasta
+Unbinned sequences: MaxBin_Results/W1Cont_AllMap.noclass
+
+
+========== Elapsed Time ==========
+0 hours 6 minutes and 1 seconds.
+
