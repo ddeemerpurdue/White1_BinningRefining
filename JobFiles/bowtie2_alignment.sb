@@ -1,0 +1,63 @@
+#!/bin/bash -l
+
+
+# FILENAME: bowtie2_alignment.sb
+#SBATCH -A lindems
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=20
+#SBATCH --output=bt2_samsorting_indexing.out
+#SBATCH --time=36:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ddeemer@purdue.edu
+#SBATCH --job-name Index_Sort
+
+# Step 1: Load required modules:
+module load utilities monitor
+# track per-code CPU load
+monitor cpu percent --all-cores >cpu-percent_W3.log &
+CPU_PID=$!
+# track memory usage
+monitor cpu memory >cpu-memory_W3.log &
+MEM_PID=$!
+
+
+module load bioinfo
+module load bowtie2/2.3.5.1
+module load samtools/1.4
+
+cd /scratch/snyder/d/ddeemer/WhiteRed/BAM/MultiMappers
+
+# Step 2: Build Bowtie2 index
+bowtie2-build assembly_metaSpades/W1.contigs.fasta bowtie2_W1_index
+
+
+#  Step 3: Align .fastq files to the indexed W1.contigs.fasta
+# W1
+time bowtie2 -x bowtie2_W1_index -1 FASTQ/043948_W12-D7_R1_filtered.fastq -2 FASTQ/043948_W12-D7_R2_filtered.fastq | samtools view -b -o BAM/MultiMappers/W1_Aligned_mpi.bam
+samtools sort -o W1_BT2_Aligned.sorted.bam W1_Aligned_BT2.bam
+samtools index W1_BT2_Aligned.sorted.bam
+
+# W2
+time bowtie2 -x bowtie2_W1_index -1 FASTQ/043949_W22-D7_R1_filtered.fastq -2 FASTQ/043949_W22-D7_R2_filtered.fastq | samtools view -b -o BAM/MultiMappers/W2_Aligned_BT2.bam
+samtools sort -o W2_BT2_Aligned.sorted.bam W2_Aligned_BT2.bam
+samtools index W2_BT2_Aligned.sorted.bam
+
+#W3
+time bowtie2 --threads 20 -x BowtieIndex/bowtie2_W1_index -1 FASTQ/043950_W32-D7_R1_filtered.fastq -2 FASTQ/043950_W32-D7_R2_filtered.fastq | samtools view -b -o BAM/MultiMappers/W3_Aligned_BT2_MT.bam
+samtools sort -o W3_BT2_Aligned.sorted.bam W3_Aligned_BT2_MT.bam
+samtools index W3_BT2_Aligned.sorted.bam
+
+# W4_D7
+#time bowtie2 --threads 20 -x BowtieIndex/bowtie2_W1_index -1 FASTQ/043951_W42-D7_R1_filtered.fastq -2 FASTQ/043951_W42-D7_R2_filtered.fastq | samtools view -b -o BAM/MultiMappers/W4D7_Aligned_BT2_MT.bam
+samtools sort -o W4D7_BT2_Aligned.sorted.bam W4D7_Aligned_BT2_MT.bam
+samtools index W4D7_BT2_Aligned.sorted.bam
+
+# W4_D15
+time bowtie2 --threads 20 -x BowtieIndex/bowtie2_W1_index -1 FASTQ/043947_W43-D15_R1_filtered.fastq  -2 FASTQ/043947_W43-D15_R2_filtered.fastq | samtools view -b -o BAM/MultiMappers/W4D15_Aligned_BT2_MT.bam
+samtools sort -o W4D15_BT2_Aligned.sorted.bam W4D15_Aligned_BT2_MT.bam
+samtools index W4D15_BT2_Aligned.sorted.bam
+
+
+# shut down the resource monitors
+#kill -s INT $CPU_PID $MEM_PID
