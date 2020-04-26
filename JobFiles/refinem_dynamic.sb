@@ -1,0 +1,53 @@
+#!/bin/bash -l
+
+#SBATCH -A standby
+#SBATCH --nodes=1
+#SBATCH --time=02:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ddeemer@purdue.edu
+
+
+# Step 1: Load required modules:
+
+module load bioinfo
+module load RefineM/0.0.25
+module load blast/2.9.0+
+module load HMMER/3.2.1
+
+# ~~~~~~~~~~ Change This Header ~~~~~~~~~~ #
+# Step 2: Grab make environmental variables
+BASEDIR=/scratch/snyder/d/ddeemer/WhiteRed/
+SCAFFOLD=assembly_metaSpades/W1.contigs.fasta
+BIN=MaxBin_Results/BT2_All
+WDIR=RefineM/BT2_All/rm_99F_All_abunds
+BAMS=BAM/filtered_SAMs
+REFERENCE=RefineM/References
+# ~~~~~~~~~~ Change This Header ~~~~~~~~~~ #
+
+cd $BASEDIR
+
+
+# Step 3a - Run RefineM to remove contamination based on genomic properties
+
+refinem scaffold_stats -c 20 -x fasta $SCAFFOLD $BIN $WDIR/stats_output_dir/ $BAMS/*sorted.bam
+
+refinem outliers --no-plots $WDIR/stats_output_dir/scaffold_stats.tsv $WDIR/outlier_output
+
+# Filter bins:
+refinem filter_bins -x fasta $BIN $WDIR/outlier_output/outliers.tsv $WDIR/outlier_output/filtered_output_dir/
+
+
+# Step 3b - Remove contamination based on taxonomic assignments
+
+refinem call_genes -c 40 -x fasta $WDIR/outlier_output/filtered_output_dir/ $WDIR/gene_output/
+
+refinem taxon_profile -c 40 -x fna $WDIR/gene_output/ $WDIR/stats_output_dir/scaffold_stats.tsv $REFERENCE/gtdb_r89_protein_db.2019-09-27.faa.dmnd $REFERENCE/gtdb_r89_taxonomy.2019-09-27.tsv $WDIR/taxon_profile_output_dir/
+
+refinem taxon_filter -c 40 $WDIR/taxon_profile_output_dir/ $WDIR/taxon_filter.tsv
+
+refinem filter_bins -x fasta $WDIR/outlier_output/filtered_output_dir/ $WDIR/taxon_filter.tsv $WDIR/taxon_filtered_output_dir
+
+
+# Step 3c - Remove contigs with incongruent 16s rRNA genes
+
+refinem ssu_erroneous -x fasta $WDIR/taxon_filtered_output_dir $WDIR/taxon_profile_output_dir/ $REFERENCE/gtdb_r80_ssu_db.2018-01-18.fna $REFERENCE/gtdb_r89_taxonomy.2019-09-27.tsv $WDIR/ssu_output/
