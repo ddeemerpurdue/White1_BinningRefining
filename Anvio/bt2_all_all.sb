@@ -1,0 +1,64 @@
+#!/bin/bash -l
+
+#SBATCH -A standby
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=20
+#SBATCH --mem-per-cpu=10G
+#SBATCH --time=04:00:00
+# #SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ddeemer@purdue.edu
+
+# Step 0: Change directory and set up variables
+cd /scratch/snyder/d/ddeemer/WhiteRed/Anvio/BT2AllDef
+CONTIGS=/scratch/snyder/d/ddeemer/WhiteRed/assembly_metaSpades/W1.contigs.fasta
+CONTIG_DB=contigs-BT2AllDef-AllDef.db
+PROJECT_NAME='BT2 bins with all abundances and refined using all default abundances.'
+OUTPUT_PATH=/scratch/snyder/d/ddeemer/WhiteRed/Anvio/BT2_AllDef/BT2AllDef_AllDef
+BAM_PATH=/scratch/snyder/d/ddeemer/WhiteRed/BAM
+
+# Step 1: Load required modules
+module load bioinfo
+module load conda
+
+
+# Step 2: Activate the previous creared  Anvio environment
+#conda create -y --name anvio-6.2 python=3.6
+#conda init bash
+#exec bash
+echo 'Conda list before Anvio activation:'
+conda list
+conda activate anvio-6.2
+echo 'Conda list after Anvio activation:'
+conda list
+#conda install -y -c conda-forge -c bioconda anvio=6.2
+echo 'Activate anvio-6.2 worked'
+
+
+# Step 3: Go through all of the Anvi'o steps to make a database
+
+# a.) Generate contigs database
+anvi-gen-contigs-database -f $CONTIGS -o $CONTIG_DB -n "$PROJECT_NAME"
+
+# b.) Run HMMs
+anvi-run-hmms -c $CONTIG_DB --num-threads 10
+
+# c.) Run NCBI COGs
+anvi-setup-ncbi-cogs --reset
+anvi-run-ncbi-cogs -c $CONTIG_DB --num-threads 10
+
+# d.) Run anvi-profile for each of the BAM files:
+for B in $BAM_PATH/*.sorted.bam
+do
+anvi-profile -i $B -c $CONTIG_DB --output-dir "${OUTPUT_PATH}_${B}"
+done
+
+for C in $BAM_PATH/MultiMappers/*.sorted.bam
+do
+anvi-profile -i $C -c $CONTIG_DB --output-dir "${OUTPUT_PATH}_${C}"
+done
+
+# e.) Merge all anvio profiles - there should be 10 profiles!
+anvi-merge */PROFILE.DB -o SAMPLES-MERGED -c $CONTIG_DB --sample-name 'BT2-AllDef-AllDef'
+
+# f.) Import collection of bins
+anvi-import-collection bin_info_BT2All_All.txt -p SAMPLES-MERGED/PROFILE.db -c $CONTIG_DB --contigs-mode --collection-name "BT2AllAll"
