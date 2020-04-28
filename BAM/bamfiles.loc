@@ -42,11 +42,20 @@
 -rw-r--r-- 1 ddeemer student  15G Apr 23 20:27 W4D7_BT2_Aligned.sorted.bam
 -rw-r--r-- 1 ddeemer student 2.5M Apr 23 20:31 W4D7_BT2_Aligned.sorted.bam.bai
 
-# 3.) FILES STILL PROCESSING - AWAITING COMPLETION!!!
+# 3.)
 /scratch/snyder/d/ddeemer/WhiteRed/BAM/filtered_SAMs
--rw-r--r-- 1 ddeemer student  61G Apr 24 08:54 W1_99F.sam
--rw-r--r-- 1 ddeemer student  11G Apr 24 10:48 W1_BT2_99F.bam
--rw-r--r-- 1 ddeemer student 114G Apr 24 09:23 W2_99F.sam
--rw-r--r-- 1 ddeemer student  61G Apr 24 09:36 W3_99F.bam
--rw-r--r-- 1 ddeemer student  58G Apr 24 10:14 W4D15_99F.bam
--rw-r--r-- 1 ddeemer student 111G Apr 24 10:00 W4D7_99F.bam
+-rw-r--r-- 1 ddeemer student  12G Apr 24 10:53 W1_BT2_99F.bam
+-rw-r--r-- 1 ddeemer student 5.8G Apr 24 15:11 W1_BT2_99F.sorted.bam
+-rw-r--r-- 1 ddeemer student 5.2M Apr 24 18:48 W1_BT2_99F.sorted.bam.bai
+-rw-r--r-- 1 ddeemer student  24G Apr 24 12:09 W2_BT2_99F.bam
+-rw-r--r-- 1 ddeemer student  11G Apr 24 16:25 W2_BT2_99F.sorted.bam
+-rw-r--r-- 1 ddeemer student 3.2M Apr 24 18:51 W2_BT2_99F.sorted.bam.bai
+-rw-r--r-- 1 ddeemer student  12G Apr 24 12:49 W3_BT2_99F.bam
+-rw-r--r-- 1 ddeemer student 5.8G Apr 24 17:07 W3_BT2_99F.sorted.bam
+-rw-r--r-- 1 ddeemer student 5.2M Apr 24 18:52 W3_BT2_99F.sorted.bam.bai
+-rw-r--r-- 1 ddeemer student 6.5G Apr 24 14:29 W4D15_BT2_99F.bam
+-rw-r--r-- 1 ddeemer student 2.7G Apr 24 18:46 W4D15_BT2_99F.sorted.bam
+-rw-r--r-- 1 ddeemer student 1.4M Apr 24 18:57 W4D15_BT2_99F.sorted.bam.bai
+-rw-r--r-- 1 ddeemer student  23G Apr 24 14:04 W4D7_BT2_99F.bam
+-rw-r--r-- 1 ddeemer student  11G Apr 24 18:22 W4D7_BT2_99F.sorted.bam
+-rw-r--r-- 1 ddeemer student 3.1M Apr 24 18:56 W4D7_BT2_99F.sorted.bam.bai
