@@ -9,11 +9,10 @@
 #SBATCH --mail-user=ddeemer@purdue.edu
 
 # Step 0: Change directory and set up variables
-cd /scratch/snyder/d/ddeemer/WhiteRed/Anvio/BT2AllDef
+cd /scratch/snyder/d/ddeemer/WhiteRed/Anvio/BT2-Def-99F
 CONTIGS=/scratch/snyder/d/ddeemer/WhiteRed/assembly_metaSpades/W1.contigs.fasta
-CONTIG_DB=contigs-BT2AllDef-AllDef.db
-PROJECT_NAME='BT2 bins with all abundances and refined using all default abundances.'
-OUTPUT_PATH=/scratch/snyder/d/ddeemer/WhiteRed/Anvio/BT2_AllDef/BT2AllDef_AllDef
+CONTIG_DB=contigs-BT2DefaultAll.db
+PROJECT_NAME='BT2 Default vs 99 Percent Identity Filtered.'
 BAM_PATH=/scratch/snyder/d/ddeemer/WhiteRed/BAM
 
 # Step 1: Load required modules
@@ -21,44 +20,44 @@ module load bioinfo
 module load conda
 
 
-# Step 2: Activate the previous creared  Anvio environment
-#conda create -y --name anvio-6.2 python=3.6
-#conda init bash
-#exec bash
-echo 'Conda list before Anvio activation:'
-conda list
-conda activate anvio-6.2
-echo 'Conda list after Anvio activation:'
-conda list
-#conda install -y -c conda-forge -c bioconda anvio=6.2
-echo 'Activate anvio-6.2 worked'
+# Step 2: Activate the previously creared  Anvio environment
+#conda activate anvio-6.2
 
 
 # Step 3: Go through all of the Anvi'o steps to make a database
 
 # a.) Generate contigs database
-anvi-gen-contigs-database -f $CONTIGS -o $CONTIG_DB -n "$PROJECT_NAME"
+#anvi-gen-contigs-database -f $CONTIGS -o $CONTIG_DB -n "$PROJECT_NAME"
 
 # b.) Run HMMs
-anvi-run-hmms -c $CONTIG_DB --num-threads 10
+#anvi-run-hmms -c $CONTIG_DB --num-threads 20
 
 # c.) Run NCBI COGs
-anvi-setup-ncbi-cogs --reset
-anvi-run-ncbi-cogs -c $CONTIG_DB --num-threads 10
+#anvi-setup-ncbi-cogs --reset
+#anvi-run-ncbi-cogs -c $CONTIG_DB --num-threads 20
 
-# d.) Run anvi-profile for each of the BAM files:
-for B in $BAM_PATH/*.sorted.bam
-do
-anvi-profile -i $B -c $CONTIG_DB --output-dir "${OUTPUT_PATH}_${B}"
-done
+# d.) Run anvi-profile for each of the 99% identity BAM files:
+#for B in $BAM_PATH/filtered_SAMs/*.sorted.bam
+#do
+#PROF_OUT=$(basename $B)
+#anvi-profile --num-threads 20 -i $B -c $CONTIG_DB --output-dir ${PROF_OUT:0:6}
+#done
 
 for C in $BAM_PATH/MultiMappers/*.sorted.bam
 do
-anvi-profile -i $C -c $CONTIG_DB --output-dir "${OUTPUT_PATH}_${C}"
+PROF_OUT=$(basename $C)
+anvi-profile --num-threads 20 -i $C -c $CONTIG_DB --output-dir ${PROF_OUT:0:6}
 done
 
-# e.) Merge all anvio profiles - there should be 10 profiles!
-anvi-merge */PROFILE.DB -o SAMPLES-MERGED -c $CONTIG_DB --sample-name 'BT2-AllDef-AllDef'
+# e.) Merge all anvio profiles
+anvi-merge */PROFILE.db -o Default_BT2_99F_BT2 -c $CONTIG_DB --sample-name 'Default_BT2_vs_99F_BT2_Profiles'
 
-# f.) Import collection of bins
-anvi-import-collection bin_info_BT2All_All.txt -p SAMPLES-MERGED/PROFILE.db -c $CONTIG_DB --contigs-mode --collection-name "BT2AllAll"
+# Step 4: Add bin collections for both BT2 default and BT2 99F refined bins.
+anvi-import-collection ../AllBT2DefaultBins.txt -p Default_BT2_99F_BT2/PROFILE.db -c $CONTIG_DB --contigs-mode --collection-name "BT2Default_All_Bins"
+
+anvi-import-collection ../AllBT299FBins.txt -p Default_BT2_99F_BT2/PROFILE.db -c $CONTIG_DB --contigs-mode --collection-name "BT299F_All_Bins"
+
+# Step 5: Add taxnomy information
+anvi-setup-scg-databases
+# Above is only required once
+anvi-run-scg-taxonomy -c contigs-BT2DefaulAll.db
