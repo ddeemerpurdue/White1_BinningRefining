@@ -1,0 +1,9 @@
+# Locations of merged profiles and contigs that have been created thus far.
+
+1. Profiling made from W1 contigs and BAM files from Bowtie2 and BWA default parameters:
+/scratch/snyder/d/ddeemer/WhiteRed/Anvio/BT2AllDef/Default_BWA_BT2/
+- Parent directory also contains all of the single PROFILE.db files that were used to create the merged PROFILE.db
+
+2. Profiling made from W1 contigs and BAM files from Bowtie2: Default and 99 % identity filter:
+/scratch/snyder/d/ddeemer/WhiteRed/Anvio/BT2-Def-99F/Default_BT2_99F_BT2/
+- Parent directory also contains all of the single PROFILE.db files that were used to create the merged PROFILE.db
