@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=20
+#SBATCH -n 20
+#SBATCH --mem-per-cpu=5G
+#SBATCH --time=04:00:00
+
+module load bioinfo
+module load BBMap/33.34
+
+# ~~~~~~~~~~  Change this section ~~~~~~~~~~ #
+# Step 1: Setup variables
+DIR=<path/to/working/directory>
+BAMDIR=<path/to/bams>
+# ~~~~~~~~~~ Change this section ~~~~~~~~~~ #
+
+# Step 2: Loop through files to create abundances
+for f in $BAMDIR/*.bam
+do
+fname="${f%.*}"
+COV=$fname-cov.txt
+ABUND=$fname-abund.txt
+pileup.sh in=$f out=$COV
+awk '{print $1"\t"$5}' $COV | grep  -v '^#' > $ABUND
