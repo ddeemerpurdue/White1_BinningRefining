@@ -1,1 +1,31 @@
-#!/bin/bash
+#!/bin/bash -l
+
+#SBATCH -A lindems
+#SBATCH --nodes=1
+#SBATCH --ntasks=5
+#SBATCH -n 20
+#SBATCH --mem-per-cpu=5G
+#SBATCH --time=4:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ddeemer@purdue.edu
+
+cd /scratch/snyder/d/ddeemer/WhiteRed
+module load bioinfo
+module load MaxBin/2.2.3
+
+# Step 1: Step Up Variables:
+ASSEMBLY=</path/to/assembly/*>
+OUTDIR=</path/to/directory/>
+ABUND01=</path/to/abundance/*>
+ABUND02=</path/to/abundance/*>
+ABUND03=</path/to/abundance/*>
+
+
+#Step 2: Run the program
+# Bin contigs based on tetranucleotide frequency and contig coverages
+
+time run_MaxBin.pl -contig $ASSEMBLY -out OUTDIR -abund $ABUND01
+
+time run_MaxBin.pl -contig $ASSEMBLY -out OUTDIR -abund $ABUND02
+
+time run_MaxBin.pl -contig $ASSEMBLY -out OUTDIR -abund $ABUND03
