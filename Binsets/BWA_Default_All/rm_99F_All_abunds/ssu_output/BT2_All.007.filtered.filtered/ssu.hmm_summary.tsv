@@ -1,0 +1,3 @@
+Sequence Id	HMM	i-Evalue	Start hit	End hit	SSU gene length	Reverse Complement	Sequence length
+NODE_10618_length_1072_cov_253.240905	bacteria	5.8e-246	1	972	971	True	1072
+NODE_4651_length_2613_cov_266.870993	bacteria	2e-99	2232	2611	379	True	2613

@@ -1,0 +1,39 @@
+# nhmmer :: search a DNA model, alignment, or sequence against a DNA database
+# HMMER 3.2.1 (June 2018); http://hmmer.org/
+# Copyright (C) 2018 Howard Hughes Medical Institute.
+# Freely distributed under the BSD open source license.
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query file:                      /depot/bioinfo/apps/apps/refinem-0.0.25/lib/python/refinem-0.0.24-py2.7.egg/refinem/data_files/hmms/SSU_bacteria.hmm
+# target sequence database:        -
+# output directed to file:         RefineM/BT2_All/rm_99F_All_abunds/ssu_output/BT2_All.001.filtered.filtered/ssu.hmm_bacteria.txt
+# show alignments in output:       no
+# sequence reporting threshold:    E-value <= 1e-05
+# number of worker threads:        1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       bacteria  [M=1523]
+Scores for complete hits:
+    E-value  score  bias  Sequence  start    end  Description
+    ------- ------ -----  --------  -----  -----  -----------
+
+   [No hits detected that satisfy reporting thresholds]
+
+
+Annotation for each hit :
+
+   [No targets detected that satisfy reporting thresholds]
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query model(s):                            1  (1523 nodes)
+Target sequences:                         54  (5621494 residues searched)
+Residues passing SSV filter:           71976  (0.0128); expected (0.02)
+Residues passing bias filter:          69810  (0.0124); expected (0.02)
+Residues passing Vit filter:            2180  (0.000388); expected (0.003)
+Residues passing Fwd filter:               0  (0); expected (3e-05)
+Total number of hits:                      0  (0)
+# CPU time: 0.78u 0.00s 00:00:00.78 Elapsed: 00:00:00.79
+# Mc/sec: 10759.01
+//
+[ok]

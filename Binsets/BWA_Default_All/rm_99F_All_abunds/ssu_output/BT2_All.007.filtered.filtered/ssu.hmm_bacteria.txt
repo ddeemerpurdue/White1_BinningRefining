@@ -1,0 +1,47 @@
+# nhmmer :: search a DNA model, alignment, or sequence against a DNA database
+# HMMER 3.2.1 (June 2018); http://hmmer.org/
+# Copyright (C) 2018 Howard Hughes Medical Institute.
+# Freely distributed under the BSD open source license.
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query file:                      /depot/bioinfo/apps/apps/refinem-0.0.25/lib/python/refinem-0.0.24-py2.7.egg/refinem/data_files/hmms/SSU_bacteria.hmm
+# target sequence database:        -
+# output directed to file:         RefineM/BT2_All/rm_99F_All_abunds/ssu_output/BT2_All.007.filtered.filtered/ssu.hmm_bacteria.txt
+# show alignments in output:       no
+# sequence reporting threshold:    E-value <= 1e-05
+# number of worker threads:        1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       bacteria  [M=1523]
+Scores for complete hits:
+    E-value  score  bias  Sequence                               start    end  Description
+    ------- ------ -----  --------                               -----  -----  -----------
+   5.8e-246  818.0  25.6  NODE_10618_length_1072_cov_253.240905    972      1 
+      2e-99  332.7   5.0  NODE_4651_length_2613_cov_266.870993    2611   2232 
+
+
+Annotation for each hit :
+>> NODE_10618_length_1072_cov_253.240905  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  818.0  25.6  5.8e-246        35       954 ..       972         1 ..       993         1 ..      1072    0.93
+
+>> NODE_4651_length_2613_cov_266.870993  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  332.7   5.0     2e-99      1135      1514 ..      2611      2232 ..      2613      2222 ..      2613    0.98
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query model(s):                            1  (1523 nodes)
+Target sequences:                         45  (9887382 residues searched)
+Residues passing SSV filter:          202443  (0.0205); expected (0.02)
+Residues passing bias filter:         196722  (0.0199); expected (0.02)
+Residues passing Vit filter:           23378  (0.00236); expected (0.003)
+Residues passing Fwd filter:            1647  (0.000167); expected (3e-05)
+Total number of hits:                      2  (0.000137)
+# CPU time: 1.59u 0.01s 00:00:01.60 Elapsed: 00:00:01.60
+# Mc/sec: 9374.95
+//
+[ok]
