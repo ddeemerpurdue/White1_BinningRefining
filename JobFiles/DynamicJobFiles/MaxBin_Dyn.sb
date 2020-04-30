@@ -15,7 +15,9 @@ module load MaxBin/2.2.3
 
 # Step 1: Step Up Variables:
 ASSEMBLY=</path/to/assembly/*>
-OUTDIR=</path/to/directory/>
+OUTDIR01=</path/to/directory/>
+OUTDIR02=</path/to/directory/>
+OUTDIR03=</path/to/directory/>
 ABUND01=</path/to/abundance/*>
 ABUND02=</path/to/abundance/*>
 ABUND03=</path/to/abundance/*>
@@ -24,8 +26,8 @@ ABUND03=</path/to/abundance/*>
 #Step 2: Run the program
 # Bin contigs based on tetranucleotide frequency and contig coverages
 
-time run_MaxBin.pl -contig $ASSEMBLY -out OUTDIR -abund $ABUND01
+time run_MaxBin.pl -contig $ASSEMBLY -out $OUTDIR01 -abund $ABUND01
 
-time run_MaxBin.pl -contig $ASSEMBLY -out OUTDIR -abund $ABUND02
+time run_MaxBin.pl -contig $ASSEMBLY -out $OUTDIR02 -abund $ABUND02
 
-time run_MaxBin.pl -contig $ASSEMBLY -out OUTDIR -abund $ABUND03
+time run_MaxBin.pl -contig $ASSEMBLY -out $OUTDIR03 -abund $ABUND03

@@ -1,0 +1,5 @@
+SCAFFOLD=assembly_metaSpades/W1.contigs.fasta
+BIN=MaxBin_Results/BT2_All
+WDIR=RefineM/BT2_All/rm_99F_All_abunds
+BAMS=BAM/filtered_SAMs
+REFERENCE=RefineM/References
